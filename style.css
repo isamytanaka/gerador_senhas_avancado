@@ -1,111 +1,183 @@
-*{
-    font-family: sans-serif;
-    width: 100%;
-    margin: 0 auto;
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #ecf0f1;
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-body{
-    background-color: #181818;
-    width: 100%;
-    height: 100vh;
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+    color: var(--text-color);
 }
 
-.logo{
+.container {
     max-width: 600px;
-    margin-bottom: 24px;
-
-}
-
-.container-input{
-    max-width: 480px;
-    margin: 14px 0;
-}
-
-.container-input span{
-    color: #fff;
-    font-size:22px;
-}
-
-.slider{
-    -webkit-appearance: none;
     width: 100%;
-    border-radius: 5px;
-    background: #dfdfdf;
-    height: 18px;
-    outline: none;
-    margin-top: 8px;
+    padding: 20px;
 }
 
-.button-cta{
-    height: 40px;
-    background-color: #3eb72b;
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 40px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 18px;
+.password-generator-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: all 0.3s ease;
 }
 
-.container-password{
-    max-width: 480px;
-    margin: 14px 0;
+.password-generator-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: var(--secondary-color);
+}
+
+.length-setting {
+    margin-bottom: 20px;
+}
+
+.slider-container {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    cursor: pointer;
+    gap: 15px;
 }
 
-.tittle{
-    text-align: center;
-    color: #fff;
-    font-size: 28px;
-    margin-top: 24px;
-    margin-bottom: 8px;
+#passwordLength {
+    flex-grow: 1;
 }
 
-.password{
-    height: 60px;
-    background-color: rgba(0, 0, 0, 0.40);
-    border-radius: 4px;
+.character-types {
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.checkbox-group label {
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: #fff;
-    border: 1px solid #313131;
-    transition: transform 0,5s
+    gap: 10px;
 }
 
-.password:hover{
-    transform: scale(1.05);
+.strength-indicator {
+    margin-bottom: 20px;
 }
 
-.tooltip{
-    color: #fff;
-    position: relative;
-    top: 20px;
-    padding: 6px 8px;
-    background: rgb(15, 15, 15);
-    text-align: center;
-    font-size: 16px;
+.strength-bars {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.bar {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.bar.active {
+    background-color: var(--accent-color);
+}
+
+.password-output {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#generatedPassword {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 6px;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.5s;   
 }
 
-.hide{
+button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.additional-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
     display: none;
 }
 
-.container-password:hover .tooltip{
-    visibility: visible;
-    bottom: 50px;
-    opacity: 1;
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
